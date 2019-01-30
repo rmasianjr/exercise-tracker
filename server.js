@@ -4,6 +4,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const exercise = require('./routes/exercise');
+
 const port = process.env.PORT || 3000;
 const app = express();
 
@@ -25,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
+
+app.use('/api/exercise', exercise);
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
