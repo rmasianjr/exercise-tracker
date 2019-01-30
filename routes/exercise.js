@@ -3,6 +3,8 @@ const router = express.Router();
 
 const { createUser } = require('../controllers/exerciseController');
 
-router.post('/new-user', createUser);
+const catchErrors = require('../middleware/catchErrors');
+
+router.post('/new-user', catchErrors(createUser));
 
 module.exports = router;

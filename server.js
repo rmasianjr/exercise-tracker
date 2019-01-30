@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const exercise = require('./routes/exercise');
+const { notFound, errors } = require('./middleware/handleErrors');
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -29,6 +30,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/exercise', exercise);
+
+app.use(notFound);
+app.use(errors);
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
