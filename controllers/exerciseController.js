@@ -87,6 +87,7 @@ exports.getUserExercises = async (req, res) => {
   }
 
   user = user.toObject();
+  user.log = user.log.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   const resObj = Object.assign(
     {},
