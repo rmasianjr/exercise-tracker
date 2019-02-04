@@ -1,3 +1,5 @@
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -28,4 +30,26 @@ const userSchema = new Schema({
   log: [exerciseSchema]
 });
 
-module.exports = mongoose.model('User', userSchema);
+
+function validateUser(user) {
+  const schema = Joi.object().keys({
+    username: Joi.string().min(5).max(50).required()
+  });
+
+  return Joi.validate(user, schema);
+}
+
+function validateExercise(exercise) {
+  const schema = Joi.object().keys({
+    userId: Joi.objectId().required().error(() => "Invalid userId"),
+    description: Joi.string().max(50).required(),
+    duration: Joi.number().min(1).required(),
+    date: Joi.date().min('now').allow('').iso()
+  });
+
+  return Joi.validate(exercise, schema);
+}
+
+exports.validateUser = validateUser;
+exports.validateExercise = validateExercise;
+exports.User = mongoose.model('User', userSchema);
