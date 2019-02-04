@@ -6,9 +6,7 @@ exports.createUser = async (req, res) => {
   const user = await User.findOne({ username });
 
   if (user) {
-    const error = new Error('username already taken');
-    error.status = 400;
-    throw error;
+    return res.status(400).send({ error: 'username already taken' });
   }
 
   const newUser = new User({ username });
