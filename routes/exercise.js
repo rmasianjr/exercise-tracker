@@ -11,6 +11,7 @@ const {
 
 const catchErrors = require('../middleware/catchErrors');
 const validateRequest = require('../middleware/validateRequest');
+const validateId = require('../middleware/validateId');
 
 router.post(
   '/new-user',
@@ -22,6 +23,6 @@ router.post(
   validateRequest(validateExercise),
   catchErrors(addExercise)
 );
-router.get('/log', catchErrors(getUserExercises));
+router.get('/log', validateId, catchErrors(getUserExercises));
 
 module.exports = router;
