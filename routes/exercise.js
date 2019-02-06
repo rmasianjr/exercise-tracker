@@ -6,7 +6,8 @@ const { validateUser, validateExercise } = require('../models/User');
 const {
   createUser,
   addExercise,
-  getUserExercises
+  getUserExercises,
+  getAllUsers
 } = require('../controllers/exerciseController');
 
 const catchErrors = require('../middleware/catchErrors');
@@ -24,5 +25,6 @@ router.post(
   catchErrors(addExercise)
 );
 router.get('/log', validateId, catchErrors(getUserExercises));
+router.get('/users', catchErrors(getAllUsers));
 
 module.exports = router;

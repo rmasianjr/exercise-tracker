@@ -102,3 +102,9 @@ exports.getUserExercises = async (req, res) => {
 
   res.send(resObj);
 };
+
+exports.getAllUsers = async (req, res) => {
+  const users = await User.find({}).select('-__v -log');
+
+  res.send(users);
+};
