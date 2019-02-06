@@ -8,7 +8,7 @@ const {
   addExercise,
   getUserExercises,
   getAllUsers
-} = require('../controllers/exerciseController');
+} = require('../controllers/userController');
 
 const catchErrors = require('../middleware/catchErrors');
 const validateRequest = require('../middleware/validateRequest');
