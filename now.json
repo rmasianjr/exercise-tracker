@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "name": "exercise-tracker",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@now/node-server"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "@exercise-mongo-uri"
+  }
+}
